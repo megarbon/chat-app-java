@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="styles/commoaan.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      .fondo {
+        clip-path: polygon(
+          74.1% 44.1%,
+          100% 61.6%,
+          97.5% 26.9%,
+          85.5% 0.1%,
+          80.7% 2%,
+          72.5% 32.5%,
+          60.2% 62.4%,
+          52.4% 68.1%,
+          47.5% 58.3%,
+          45.2% 34.5%,
+          27.5% 76.7%,
+          0.1% 64.9%,
+          17.9% 100%,
+          27.6% 76.8%,
+          76.1% 97.7%,
+          74.1% 44.1%
+        );
+      }
+      .no-scroll {
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body class="no-scroll">
+    <header class="text-gray-600 body-font">
+      <div
+        class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center"
+      >
+        <a
+          class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0 hidden md:flex"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            class="w-10 h-10 text-white p-2 bg-purple-500 rounded-full"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
+            ></path>
+          </svg>
+          <span class="ml-3 text-xl">Bili Bili</span>
+        </a>
+        <nav
+          class="md:ml-auto md:mr-0 flex flex-wrap items-end text-base justify-center"
+        >
+          <a class="mr-5 hover:text-gray-900">Inicio</a>
+          <a class="mr-5 hover:text-gray-900">Chat</a>
+          <a class="mr-5 hover:text-gray-900">Contacto</a>
+        </nav>
+      </div>
+    </header>
+
+    <!--contenido va aqui-->
+    <div class="dark:bg-gray-800 py-28">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row -mx-4">
+          <div class="md:flex-1 px-4">
+            <div class="h-[460px] rounded-lg bg-gray-300 dark:bg-gray-700 mb-4">
+              <img
+                class="w-full h-full object-cover rounded"
+                src="../assets/images/retro-china.webp"
+                alt="Product Image"
+              />
+            </div>
+            <div class="flex -mx-2 mb-4">
+              <div class="w-1/2 px-2">
+                <button
+                  class="w-full bg-gray-900 dark:bg-gray-600 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800 dark:hover:bg-gray-700"
+                >
+                  Añadir al Carro
+                </button>
+              </div>
+              <div class="w-1/2 px-2">
+                <button
+                  class="w-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white py-2 px-4 rounded-full font-bold hover:bg-gray-300 dark:hover:bg-gray-600"
+                >
+                  Añadir a Favoritos
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="md:flex-1 px-4">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-2">
+              Jordan 7 Retro China
+            </h2>
+            <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed
+              ante justo. Integer euismod libero id mauris malesuada tincidunt.
+            </p>
+            <div class="flex mb-4">
+              <div class="mr-4">
+                <span class="font-bold text-gray-700 dark:text-gray-300"
+                  >Precio:</span
+                >
+                <span class="text-gray-600 dark:text-gray-300">299.95 €</span>
+              </div>
+              <div>
+                <span class="font-bold text-gray-700 dark:text-gray-300"
+                  >Disponibilidad:</span
+                >
+                <span class="text-green-600 dark:text-green-300"
+                  >Disponible</span
+                >
+              </div>
+            </div>
+            <div class="mb-4">
+              <span class="font-bold text-gray-700 dark:text-gray-300"
+                >Seleccionar Color:</span
+              >
+              <div class="flex items-center mt-2">
+                <button
+                  class="w-6 h-6 rounded-full bg-gray-800 dark:bg-gray-200 mr-2"
+                ></button>
+                <button
+                  class="w-6 h-6 rounded-full bg-red-500 dark:bg-red-700 mr-2"
+                ></button>
+                <button
+                  class="w-6 h-6 rounded-full bg-blue-500 dark:bg-blue-700 mr-2"
+                ></button>
+                <button
+                  class="w-6 h-6 rounded-full bg-yellow-500 dark:bg-yellow-700 mr-2"
+                ></button>
+              </div>
+            </div>
+            <div class="mb-4">
+              <span class="font-bold text-gray-700 dark:text-gray-300"
+                >Seleccionar Talla:</span
+              >
+              <div class="flex items-center mt-2">
+                <button
+                  class="bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-white py-2 px-4 rounded-full font-bold mr-2 hover:bg-gray-400 dark:hover:bg-gray-600"
+                >
+                  S
+                </button>
+                <button
+                  class="bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-white py-2 px-4 rounded-full font-bold mr-2 hover:bg-gray-400 dark:hover:bg-gray-600"
+                >
+                  M
+                </button>
+                <button
+                  class="bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-white py-2 px-4 rounded-full font-bold mr-2 hover:bg-gray-400 dark:hover:bg-gray-600"
+                >
+                  L
+                </button>
+                <button
+                  class="bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-white py-2 px-4 rounded-full font-bold mr-2 hover:bg-gray-400 dark:hover:bg-gray-600"
+                >
+                  XL
+                </button>
+                <button
+                  class="bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-white py-2 px-4 rounded-full font-bold mr-2 hover:bg-gray-400 dark:hover:bg-gray-600"
+                >
+                  XXL
+                </button>
+              </div>
+            </div>
+            <div>
+              <span class="font-bold text-gray-700 dark:text-gray-300"
+                >Descripción:</span
+              >
+              <p class="text-gray-600 dark:text-gray-300 text-sm mt-2">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed
+                ante justo. Integer euismod libero id mauris malesuada
+                tincidunt. Vivamus commodo nulla ut lorem rhoncus aliquet. Duis
+                dapibus augue vel ipsum pretium, et venenatis sem blandit.
+                Quisque ut erat vitae nisi ultrices placerat non eget velit.
+                Integer ornare mi sed ipsum lacinia, non sagittis mauris
+                blandit. Morbi fermentum libero vel nisl suscipit, nec tincidunt
+                mi consectetur.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--contenido acaba aqui-->
+
+    <!--Fondo de pantalla-->
+    <div class="px-6 pt-14 lg:px-8">
+      <div
+        class="inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80 absolute"
+      >
+        <!--Fondo superior-->
+        <div
+          class="fondo relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+        ></div>
+        <!--Fondo inferior-->
+        <div
+          class="fondo relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
+        ></div>
+      </div>
+    </div>
+
+    <footer class="text-gray-600 body-font absolute fixed bottom-0 w-full">
+      <div
+        class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col"
+      >
+        <a
+          class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900"
+        >
+          <span class="ml-3 text-xl">Bili Bili Chat</span>
+        </a>
+        <p
+          class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4"
+        >
+          © 2023 Bili-Bili —
+          <a
+            href="https://twitter.com/megarbon"
+            class="text-gray-600 ml-1"
+            rel="noopener noreferrer"
+            target="_blank"
+            >@megarbon</a
+          >
+        </p>
+        <span
+          class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start"
+        >
+          <a class="text-gray-500">
+            <svg
+              fill="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              class="w-5 h-5"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"
+              ></path>
+            </svg>
+          </a>
+          <a class="ml-3 text-gray-500">
+            <svg
+              fill="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              class="w-5 h-5"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"
+              ></path>
+            </svg>
+          </a>
+          <a class="ml-3 text-gray-500">
+            <svg
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              class="w-5 h-5"
+              viewBox="0 0 24 24"
+            >
+              <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+              <path
+                d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"
+              ></path>
+            </svg>
+          </a>
+          <a class="ml-3 text-gray-500">
+            <svg
+              fill="currentColor"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="0"
+              class="w-5 h-5"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke="none"
+                d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"
+              ></path>
+              <circle cx="4" cy="4" r="2" stroke="none"></circle>
+            </svg>
+          </a>
+        </span>
+      </div>
+    </footer>
+  </body>
+</html>

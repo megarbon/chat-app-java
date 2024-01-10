@@ -1,0 +1,8 @@
+mgb\controller\ProcessPurchaseServlet.class
+com\mycompany\tiendaonlinejava\resources\JakartaEE10Resource.class
+mgb\controller\ProcessRegisterServlet.class
+mgb\model\Product.class
+mgb\dao\ConnectionDB.class
+mgb\model\User.class
+com\mycompany\tiendaonlinejava\JakartaRestConfiguration.class
+mgb\controller\ProcessLoginServlet.class
