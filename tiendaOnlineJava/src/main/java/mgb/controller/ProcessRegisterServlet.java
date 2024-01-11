@@ -25,14 +25,9 @@ public class ProcessRegisterServlet extends HttpServlet {
         String correoElectronico = request.getParameter("correoElectronico");
         String contrasena = request.getParameter("contrasena");
         String apellidos = request.getParameter("apellidos");
-        String direccion = request.getParameter("direccion");
-        String codigoPostal = request.getParameter("codigoPostal");
-        String numeroTarjeta = request.getParameter("numeroTarjeta");
-        String fotoPerfilURL = request.getParameter("fotoPerfilURL");
-
+        
         // Crear un objeto User con la información del formulario
-        User newUser = new User(0, nombre, correoElectronico, contrasena, apellidos,
-                direccion, codigoPostal, numeroTarjeta, fotoPerfilURL);
+        User newUser = new User(0, nombre, correoElectronico, contrasena, apellidos);
 
         // Insertar el nuevo usuario en la base de datos
         int result = dbConnection.insertUser(newUser);

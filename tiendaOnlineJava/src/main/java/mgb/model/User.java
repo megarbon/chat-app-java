@@ -29,6 +29,16 @@ public class User {
         this.fotoPerfilURL = fotoPerfilURL;
     }
 
+    public User(int idCliente, String nombre, String correoElectronico, String contrasena, String apellidos) {
+        this.idCliente = idCliente;
+        this.nombre = nombre;
+        this.correoElectronico = correoElectronico;
+        this.contrasena = contrasena;
+        this.apellidos = apellidos;
+    }
+    
+    
+
     public int getIdCliente() {
         return idCliente;
     }
