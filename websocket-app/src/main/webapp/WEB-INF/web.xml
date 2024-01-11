@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="6.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_6_0.xsd">
+
+    <!-- Definir index.jsp como la página de inicio -->
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+    <!-- Configuración de los servlets y mapeos -->
+    <servlet>
+        <servlet-name>ProcesarLoginServlet</servlet-name>
+        <servlet-class>controller.ProcesarLoginServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProcesarRegistroServlet</servlet-name>
+        <servlet-class>controller.ProcesarRegistroServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProcesarMensajeServlet</servlet-name>
+        <servlet-class>controller.ProcesarMensajeServlet</servlet-class>
+    </servlet>
+
+    <!-- Configuración de la sesión -->
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+
+</web-app>

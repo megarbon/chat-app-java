@@ -1,0 +1,11 @@
+controller\ProcesarMensajeServlet.class
+websocket\MessageModelEncoder.class
+com\mycompany\websocket\app\resources\JakartaEE10Resource.class
+com\mycompany\websocket\app\JakartaRestConfiguration.class
+controller\ProcesarRegistroServlet.class
+modelo\UserModel.class
+controller\ProcesarLoginServlet.class
+websocket\ChatWebsocketEndpoint.class
+websocket\MessageModelDecoder.class
+modelo\MessageModel.class
+modelo\DatabaseManager.class
