@@ -17,8 +17,10 @@ public class ProcessLoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String correoElectronico = request.getParameter("correoElectronico"); // Cambiado para reflejar el cambio en el formulario de inicio de sesión
-        String contrasena = request.getParameter("contrasena"); // Cambiado para reflejar el cambio en el formulario de inicio de sesión
+        String correoElectronico = request.getParameter("email"); // formulario de inicio de sesión
+        String contrasena = request.getParameter("password"); // formulario de inicio de sesión
+
+        dbConnection.establishConnection();
 
         // Verifica si las credenciales son válidas en la base de datos
         if (dbConnection.isValidUserCredentials(correoElectronico, contrasena)) {

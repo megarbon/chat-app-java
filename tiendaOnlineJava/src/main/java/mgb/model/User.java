@@ -29,6 +29,9 @@ public class User {
         this.fotoPerfilURL = fotoPerfilURL;
     }
 
+    public User() {
+    }
+
     public int getIdCliente() {
         return idCliente;
     }
