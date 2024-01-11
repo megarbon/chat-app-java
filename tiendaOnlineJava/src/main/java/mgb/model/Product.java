@@ -25,6 +25,9 @@ public class Product {
         this.categoria = categoria;
     }
 
+    public Product() {
+    }
+
     // Métodos de acceso
     public int getIdProducto() {
         return idProducto;
