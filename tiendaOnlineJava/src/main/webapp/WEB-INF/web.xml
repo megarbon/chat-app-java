@@ -3,7 +3,6 @@
     <servlet>
         <servlet-name>ProcessLoginServlet</servlet-name>
         <servlet-class>mgb.controller.ProcessLoginServlet</servlet-class>
-        <url-pattern>/ProcessLoginServlet</url-pattern>
     </servlet>
     <servlet>
         <servlet-name>ProcessRegisterServlet</servlet-name>

@@ -184,19 +184,20 @@ public class ConnectionDB {
      * @param password La contraseña del usuario.
      * @return true si las credenciales son válidas, false de lo contrario.
      */
-    public boolean isValidUserCredentials(String username, String password) {
+    public boolean isValidUserCredentials(String correoElectronico, String contrasena) {
         try {
-            if (c != null && !c.isClosed()) {
-                String query = "SELECT * FROM cliente WHERE correoElectronico=? AND contrasena=?";
-                try (PreparedStatement preparedStatement = c.prepareStatement(query)) {
-                    preparedStatement.setString(1, username);
-                    preparedStatement.setString(2, password);
-                    try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                        return resultSet.next();
-                    }
+            String query = "SELECT * FROM cliente WHERE correoElectronico=? AND contrasena=?";
+
+            try (PreparedStatement preparedStatement = c.prepareStatement(query)) {
+                preparedStatement.setString(1, correoElectronico);
+                preparedStatement.setString(2, contrasena);
+
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    return resultSet.next();
                 }
             }
         } catch (SQLException e) {
+            // Aquí podría lanzar una excepción específica o registrar el error de alguna manera.
             e.printStackTrace();
         }
         return false;

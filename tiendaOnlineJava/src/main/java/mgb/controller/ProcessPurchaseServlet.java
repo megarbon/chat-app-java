@@ -7,6 +7,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import mgb.dao.ConnectionDB;
 import mgb.model.Product;
 
@@ -37,7 +40,12 @@ public class ProcessPurchaseServlet extends HttpServlet {
         int cantidad = Integer.parseInt(request.getParameter("cantidad"));
 
         // Obtener el producto de la base de datos
-        Product product = dbConnection.getProductById(idProducto);
+        Product product = null;
+        try {
+            product = dbConnection.getProductById(idProducto);
+        } catch (SQLException ex) {
+            Logger.getLogger(ProcessPurchaseServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
 
         if (product != null && product.getStock() >= cantidad) {
