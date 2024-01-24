@@ -6,6 +6,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import mgb.dao.ConnectionDB;
 import mgb.model.User;
 
@@ -30,7 +33,12 @@ public class ProcessRegisterServlet extends HttpServlet {
         User newUser = new User(0, nombre, correoElectronico, contrasena, apellidos);
 
         // Insertar el nuevo usuario en la base de datos
-        int result = dbConnection.insertUser(newUser);
+        int result = 0;
+        try {
+            result = dbConnection.insertUser(newUser);
+        } catch (SQLException ex) {
+            Logger.getLogger(ProcessRegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         // Verificar si el registro fue exitoso
         if (result > 0) {

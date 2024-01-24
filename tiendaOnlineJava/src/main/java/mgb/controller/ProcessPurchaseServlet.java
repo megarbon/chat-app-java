@@ -1,13 +1,15 @@
 package mgb.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import mgb.dao.ConnectionDB;
 import mgb.model.Product;
 
@@ -25,13 +27,26 @@ public class ProcessPurchaseServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
 
+        // Verificar si el usuario ha iniciado sesión
+        int idCliente = (int) session.getAttribute("idCliente");
+        if (idCliente <= 0) {
+            // Si el idCliente no está presente en la sesión, redirige a la página de inicio de sesión
+            response.sendRedirect("Login.jsp");
+            return;
+        }
+
         // Obtener información del formulario de compra
-        int idCliente = (int) session.getAttribute("idCliente"); // Asegúrate de tener la información del cliente en la sesión
-        int idProducto = Integer.parseInt(request.getParameter("idProducto")); // Ajusta el nombre del parámetro según tu formulario
-        int cantidad = Integer.parseInt(request.getParameter("cantidad")); // Ajusta el nombre del parámetro según tu formulario
+        int idProducto = Integer.parseInt(request.getParameter("idProducto"));
+        int cantidad = Integer.parseInt(request.getParameter("cantidad"));
 
         // Obtener el producto de la base de datos
-        Product product = dbConnection.getProductById(idProducto);
+        Product product = null;
+        try {
+            product = dbConnection.getProductById(idProducto);
+        } catch (SQLException ex) {
+            Logger.getLogger(ProcessPurchaseServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
 
         if (product != null && product.getStock() >= cantidad) {
             // El producto existe y hay suficiente stock

@@ -27,7 +27,7 @@ public class ConnectionDB {
     /**
      * Establece la conexión con la base de datos.
      */
-    private void establishConnection() {
+    public void establishConnection() {
         try {
             Class.forName("org.mariadb.jdbc.Driver");
             this.c = DriverManager.getConnection(
@@ -61,94 +61,44 @@ public class ConnectionDB {
     }
 
     /**
-     * Ejecuta una consulta SQL y retorna un objeto User.
-     *
-     * @param sqlQuery La consulta SQL a ejecutar.
-     * @return Un objeto User si se encuentra, o null si no hay resultados.
-     * @throws SQLException Si ocurre un error durante la ejecución de la
-     * consulta.
-     */
-    private User executeQueryForUser(String sqlQuery, int idCliente) throws SQLException {
-        try (PreparedStatement preparedStatement = c.prepareStatement(sqlQuery)) {
-            preparedStatement.setInt(1, idCliente);
-
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                return resultSet.next() ? createUserFromResultSet(resultSet) : null;
-            }
-        }
-    }
-
-    /**
-     * Crea un objeto User a partir de los resultados de una consulta.
-     *
-     * @param resultSet Los resultados de la consulta.
-     * @return Un objeto User construido a partir de los resultados.
-     * @throws SQLException Si ocurre un error al obtener datos del ResultSet.
-     */
-    private User createUserFromResultSet(ResultSet resultSet) throws SQLException {
-        return new User(
-                resultSet.getInt("idCliente"),
-                resultSet.getString("nombre"),
-                resultSet.getString("correoElectronico"),
-                resultSet.getString("contrasena"),
-                resultSet.getString("apellidos"),
-                resultSet.getString("direccion"),
-                resultSet.getString("codigoPostal"),
-                resultSet.getString("numeroTarjeta"),
-                resultSet.getString("fotoPerfilURL")
-        );
-    }
-
-    /**
-     * Ejecuta una consulta SQL y retorna un objeto Product.
-     *
-     * @param sqlQuery La consulta SQL a ejecutar.
-     * @return Un objeto Product si se encuentra, o null si no hay resultados.
-     * @throws SQLException Si ocurre un error durante la ejecución de la
-     * consulta.
-     */
-    private Product executeQueryForProduct(String sqlQuery, int idProducto) throws SQLException {
-        try (PreparedStatement preparedStatement = c.prepareStatement(sqlQuery)) {
-            preparedStatement.setInt(1, idProducto);
-
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                return resultSet.next() ? createProductFromResultSet(resultSet) : null;
-            }
-        }
-    }
-
-    /**
-     * Crea un objeto Product a partir de los resultados de una consulta.
-     *
-     * @param resultSet Los resultados de la consulta.
-     * @return Un objeto Product construido a partir de los resultados.
-     * @throws SQLException Si ocurre un error al obtener datos del ResultSet.
-     */
-    private Product createProductFromResultSet(ResultSet resultSet) throws SQLException {
-        return new Product(
-                resultSet.getInt("idProducto"),
-                resultSet.getString("nombre"),
-                resultSet.getString("descripcion"),
-                resultSet.getDouble("precio"),
-                resultSet.getInt("stock"),
-                resultSet.getString("marca"),
-                resultSet.getString("categoria")
-        );
-    }
-
-    /**
      * Inserta un nuevo usuario en la base de datos.
      *
      * @param user El usuario a ser insertado.
      * @return El número de filas afectadas (debería ser 1 si la inserción fue
      * exitosa).
+     * @throws SQLException Si hay un error al interactuar con la base de datos.
      */
-    public int insertUser(User user) {
-        String sqlSentence = "INSERT INTO cliente (nombre, correoElectronico, contrasena, apellidos, direccion, codigoPostal, numeroTarjeta, fotoPerfilURL) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        return executeUpdate(sqlSentence, user.getNombre(), user.getCorreoElectronico(), user.getContrasena(),
-                user.getApellidos(), user.getDireccion(), user.getCodigoPostal(), user.getNumeroTarjeta(),
-                user.getFotoPerfilURL());
+    public int insertUser(User user) throws SQLException {
+        Connection miConexion = null;
+        PreparedStatement miStatement = null;
+
+        try {
+            miConexion = c; // Usar la conexión establecida en la clase
+
+            String sqlSentence = "INSERT INTO cliente (nombre, correoElectronico, contrasena, apellidos, direccion, codigoPostal, numeroTarjeta, fotoPerfilURL) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+            miStatement = miConexion.prepareStatement(sqlSentence);
+            miStatement.setString(1, user.getNombre());
+            miStatement.setString(2, user.getCorreoElectronico());
+            miStatement.setString(3, user.getContrasena());
+            miStatement.setString(4, user.getApellidos());
+            miStatement.setString(5, user.getDireccion());
+            miStatement.setString(6, user.getCodigoPostal());
+            miStatement.setString(7, user.getNumeroTarjeta());
+            miStatement.setString(8, user.getFotoPerfilURL());
+
+            return miStatement.executeUpdate(); // Retorna un valor positivo si se inserta correctamente
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e; // Lanzar la excepción para que sea manejada por el llamador
+        } finally {
+            if (miStatement != null) {
+                miStatement.close();
+            }
+            // No cierres la conexión aquí, ya que es gestionada por la clase ConnectionDB
+        }
     }
 
     /**
@@ -157,10 +107,18 @@ public class ConnectionDB {
      * @param userId El ID del usuario a ser eliminado.
      * @return El número de filas afectadas (debería ser 1 si la eliminación fue
      * exitosa).
+     * @throws SQLException Si hay un error al interactuar con la base de datos.
      */
-    public int deleteUser(int userId) {
+    public int deleteUser(int userId) throws SQLException {
         String sqlSentence = "DELETE FROM cliente WHERE idCliente = ?";
-        return executeUpdate(sqlSentence, userId);
+
+        try (PreparedStatement miStatement = c.prepareStatement(sqlSentence)) {
+            miStatement.setInt(1, userId);
+            return miStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e; // Lanzar la excepción para que sea manejada por el llamador
+        }
     }
 
     /**
@@ -168,15 +126,27 @@ public class ConnectionDB {
      *
      * @param idCliente El ID del usuario a ser recuperado.
      * @return Un objeto User si se encuentra, o null si no hay resultados.
+     * @throws SQLException Si hay un error al interactuar con la base de datos.
      */
-    public User getUserById(int idCliente) {
+    public User getUserById(int idCliente) throws SQLException {
         String sqlQuery = "SELECT * FROM cliente WHERE idCliente = ?";
-        try {
-            return executeQueryForUser(sqlQuery, idCliente);
+        try (PreparedStatement preparedStatement = c.prepareStatement(sqlQuery)) {
+            preparedStatement.setInt(1, idCliente);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    // Aquí, crea un objeto User a partir de los datos en resultSet y devuélvelo
+                    User user = new User();
+                    user.setIdCliente(resultSet.getInt("idCliente"));
+                    // Asigna los demás campos
+                    return user;
+                } else {
+                    return null; // No se encontraron resultados
+                }
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ConnectionDB.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex; // Lanzar la excepción para que sea manejada por el llamador
         }
-        return null;
     }
 
     /**
@@ -184,15 +154,27 @@ public class ConnectionDB {
      *
      * @param idProducto El ID del producto a ser recuperado.
      * @return Un objeto Product si se encuentra, o null si no hay resultados.
+     * @throws SQLException Si hay un error al interactuar con la base de datos.
      */
-    public Product getProductById(int idProducto) {
+    public Product getProductById(int idProducto) throws SQLException {
         String sqlQuery = "SELECT * FROM producto WHERE idProducto = ?";
-        try {
-            return executeQueryForProduct(sqlQuery, idProducto);
+        try (PreparedStatement preparedStatement = c.prepareStatement(sqlQuery)) {
+            preparedStatement.setInt(1, idProducto);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    // Aquí, crea un objeto Product a partir de los datos en resultSet y devuélvelo
+                    Product product = new Product();
+                    product.setIdProducto(resultSet.getInt("idProducto"));
+                    // Asigna los demás campos
+                    return product;
+                } else {
+                    return null; // No se encontraron resultados
+                }
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ConnectionDB.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex; // Lanzar la excepción para que sea manejada por el llamador
         }
-        return null;
     }
 
     /**
@@ -202,21 +184,23 @@ public class ConnectionDB {
      * @param password La contraseña del usuario.
      * @return true si las credenciales son válidas, false de lo contrario.
      */
-    public boolean isValidUserCredentials(String username, String password) {
+    public boolean isValidUserCredentials(String correoElectronico, String contrasena) {
         try {
-            if (c != null && !c.isClosed()) {
-                String query = "SELECT * FROM cliente WHERE correoElectronico=? AND contrasena=?";
-                try (PreparedStatement preparedStatement = c.prepareStatement(query)) {
-                    preparedStatement.setString(1, username);
-                    preparedStatement.setString(2, password);
-                    try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                        return resultSet.next();
-                    }
+            String query = "SELECT * FROM cliente WHERE correoElectronico=? AND contrasena=?";
+
+            try (PreparedStatement preparedStatement = c.prepareStatement(query)) {
+                preparedStatement.setString(1, correoElectronico);
+                preparedStatement.setString(2, contrasena);
+
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    return resultSet.next();
                 }
             }
         } catch (SQLException e) {
+            // Aquí podría lanzar una excepción específica o registrar el error de alguna manera.
             e.printStackTrace();
         }
         return false;
     }
+
 }
