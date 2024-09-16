@@ -87,7 +87,7 @@
     </header>
     <!--contenido va aqui-->
 
-    <div class="py-10 px-4 md:px-6 2xl:px-10 2xl:container 2xl:mx-auto bg-gray-800 mt-10">
+    <div class="py-10 px-4 md:px-6 2xl:px-10 2xl:container 2xl:mx-auto bg-gray-800 m-10">
         <div class="flex justify-start item-start space-y-2 flex-col">
             <h1
                 class="text-2xl dark:text-white lg:text-3xl font-semibold leading-7 lg:leading-9 text-gray-800"
@@ -288,7 +288,7 @@
                                 <p class="text-base dark:text-white leading-4 text-gray-800">
                                     Discount
                                     <span
-                                        class="bg-gray-200 p-1 text-xs font-medium dark:bg-white dark:text-gray-800 leading-3 text-gray-800"
+                                        class="bg-gray-200 p-1 text-xs font-medium dark:bg-emerald-300 dark:text-gray-800 leading-3 text-gray-800"
                                         >STUDENT</span
                                     >
                                 </p>
@@ -489,12 +489,12 @@
             <a
                 class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900"
                 >
-                <span class="ml-3 text-xl">Bili Bili Chat</span>
+                <span class="ml-3 text-xl">Sneaker Freaks</span>
             </a>
             <p
                 class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4"
                 >
-                © 2023 Bili-Bili —
+                © 2023 Sneaker Freaks —
                 <a
                     href="https://twitter.com/megarbon"
                     class="text-gray-600 ml-1"
